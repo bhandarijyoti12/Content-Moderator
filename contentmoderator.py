@@ -43,7 +43,7 @@ def moderate(text: str):
     # grade for trigger warning
     triggers = 0
     trigger_warning = False
-    for kw in keywords[3:]:
+    for kw in keywords:
         triggers += len(_dict[kw])
     if triggers > 0:
         trigger_warning = True
