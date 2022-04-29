@@ -7,15 +7,15 @@ from bs4 import BeautifulSoup
 from time import sleep
 from selenium.common.exceptions import NoSuchElementException
  
-chromedriver_path = '/Users/jyotibhandari/Documents/Final_Project_AI/chromedriver.exe'
-service = Service('/Users/jyotibhandari/Documents/Final_Project_AI/chromedriver.exe')
+chromedriver_path = 'chromedriver.exe'
+service = Service('chromedriver.exe')
 options = Options()
 options.add_argument("--headless")
  
 # function
 def scrape_page_text(url:str):
     # create driver
-    driver = webdriver.Chrome(executable_path="/Users/jyotibhandari/Documents/Final_Project_AI/chromedriver",
+    driver = webdriver.Chrome(executable_path="chromedriver",
      options=options)
     # launch driver
     driver.get(url)

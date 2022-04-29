@@ -96,7 +96,7 @@ accuracy = loaded_model.score(X_test, y_test) * 100
 
 @app.route('/')
 def index():
-    return render_template('index.html', data='')
+    return render_template('index_past.html', data='')
 
 @app.route('/moderate', methods=['GET', 'POST'])
 def predict():
@@ -140,7 +140,7 @@ def predict():
         "isLoaded": "true",
         "updated_text": updated_text
           }
-    return render_template('index.html', data=output)
+    return render_template('index_past.html', data=output)
 
 if __name__ == '__main__':
     app.run(debug=True)
