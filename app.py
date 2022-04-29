@@ -124,11 +124,8 @@ def predict():
             flag = "This comment is safe for children"
 
     
-<<<<<<< HEAD
 
-=======
     
->>>>>>> 05ee2a352bd108d0c17e39466706121c764876ca
     updated_text = addStrick(user_input)
     output = {
         "type": moderation_type,
