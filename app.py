@@ -19,11 +19,6 @@ loaded_model2 = pickle.load(open('SVC_test_model.sav', 'rb'))
 stop_word = stopwords.words('english')
 stm = nltk.SnowballStemmer("english")
 
-import re
-REPLACE_BY_SPACE_RE = re.compile('[/(){}\[\]\|@,;]')
-BAD_SYMBOLS_RE = re.compile('[^0-9a-z #+_]')
-STOPWORDS = set(stopwords.words('english'))
-
 
 file = open("moderate_list.txt", "r")
 moderate_lists = file.read()
@@ -75,18 +70,6 @@ def text_cleaner(input_text):
     input_text = [stm.stem(word) for word in input_text.split(' ')]
     input_text=" ".join(input_text)
     return input_text
-
-'''def text_cleaner(input_text):
-
-    input_text = input_text.lower() 
-    input_text = re.sub(r'@[A-Za-z0-9_]+','',str(input_text))    # Removing @mentions
-    input_text = re.sub(r'#','',str(input_text))                 # Removing #tag symbol
-    input_text = re.sub(r'RT[\s]+',' ',input_text)   
-    input_text = REPLACE_BY_SPACE_RE.sub(' ', input_text)
-    input_text = BAD_SYMBOLS_RE.sub('', input_text)  
-    input_text = input_text.replace('x', '')
-    input_text = ' '.join(word for word in input_text.split() if word not in STOPWORDS) 
-    return input_text'''
 
 df_train = pd.read_csv('train.csv')
 df_test = pd.read_csv('test.csv')
@@ -141,15 +124,14 @@ def predict():
             flag = "This comment is safe for children"
 
     
-    abuseWord = "shit"
-    strick = '*' * len(abuseWord)
+
     updated_text = addStrick(user_input)
     output = {
         "type": moderation_type,
         "text": user_input,
         "Flag": flag,
         "accuracy": accuracy,
-
+        "updated_text": updated_text
           }
     return render_template('index.html', data=output)
 
