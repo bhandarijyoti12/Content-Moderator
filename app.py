@@ -10,7 +10,7 @@ from nltk.corpus import stopwords
 import string
 from sklearn.model_selection import train_test_split
 import tensorflow as tf 
-
+import webscraper
 
 app = Flask(__name__, template_folder='Templates')
 loaded_model = pickle.load(open('finalized_model.sav', 'rb'))
@@ -102,15 +102,28 @@ def index():
 def predict():
     moderation_type = request.form.get('moderation_type') #web,text
     user_input = request.form.get('user_input')
-    clean_user_input= [text_cleaner(user_input)]
-    test_vect = vectoriser.transform(clean_user_input)
-    pred = loaded_model.predict(test_vect)
-    print(pred)
-    if (pred == '1'):
-        flag = "Text falls under hate and abusive category"
-    else:
-        flag = "Text falls under safe category"
-   
+    if (moderation_type=="web"):
+        Webscrappedtext= webscraper.scrape_page_text(user_input)
+        clean_user_input= [text_cleaner(Webscrappedtext)]
+        test_vect = vectoriser.transform(clean_user_input)
+        pred = loaded_model.predict(test_vect)
+        print(pred)
+        if (pred == '1'):
+            flag = "This page is not safe for children"
+        else:
+            flag = "This page is safe for children"
+    
+    else :
+        clean_user_input= [text_cleaner(user_input)]
+        test_vect = vectoriser.transform(clean_user_input)
+        pred = loaded_model.predict(test_vect)
+        print(pred)
+        if (pred == '1'):
+            flag = "This comment is not safe for children"
+        else:
+            flag = "This comment is safe for children"
+
+    
     abuseWord = "shit"
     strick = '*' * len(abuseWord)
     updated_text = user_input.replace(abuseWord, strick)
@@ -119,7 +132,7 @@ def predict():
         "text": user_input,
         "Flag": flag,
         "accuracy": accuracy,
-        "updated_text": updated_text
+
           }
     return render_template('index.html', data=output)
 
