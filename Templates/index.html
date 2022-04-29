@@ -7,44 +7,86 @@
     <title>Content Moderator - Web</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel='stylesheet' type='text/css' media='screen' href="{{ url_for('static', filename='css/main.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300&display=swap" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#web_input').hide();
+            $('#audio_input').hide();
+
+            $('input[type=radio][name=moderation_type]').change(function() {
+                if (this.value == 'text') {
+                    $('#text_input').show();
+                    $('#web_input').hide();
+                    $('#audio_input').hide();
+                }
+                else if (this.value == 'web') {
+                    $('#web_input').show();
+                    $('#text_input').hide();
+                    $('#audio_input').hide();
+                }
+                else if (this.value == 'audio') {
+                    $('#audio_input').show();
+                    $('#web_input').hide();
+                    $('#text_input').hide();
+                }
+            });
+        });
+    </script>
 </head>
 
 <body>
-    <div class="title">Content Moderation</div>
-    <div class="register_page">
-        <div class="form">
-            <form action="/moderate" method="post">
-                <div class="inputWrapper">
-                    <div class="labelWrapper"><label class="label_title">Moderation Type</label> </div>
-                    <div class="moderation">
-                        <input type="radio" id="text" name="moderation_type" value="text" checked>
-                        <label for="text">Text</label>
-                        <input type="radio" id="web" name="moderation_type" value="web">
-                        <label for="web">Web-URL</label>
-                        <input type="radio" id="image" name="moderation_type" value="image" disabled>
-                        <label for="web">Image</label>
-                        <input type="radio" id="audio" name="moderation_type" value="audio" disabled>
-                        <label for="web">Audio</label>
-                        <input type="radio" id="video" name="moderation_type" value="video" disabled>
-                        <label for="web">Video</label>
+    <div>
+        <div class="title">Content Moderation</div>
+        <div class="register_page">
+            <div class="form">
+                <form action="/moderate" method="post">
+                    <div class="inputWrapper">
+                        <div class="labelWrapper"><label class="label_title">Moderation Type</label> </div>
+                        <div class="moderation">
+                            <input type="radio" id="text" name="moderation_type" value="text" checked>
+                            <label for="text">Text</label>
+                            <input type="radio" id="web" name="moderation_type" value="web">
+                            <label for="web">Web-URL</label>
+                            <input type="radio" id="audio" name="moderation_type" value="audio">
+                            <label for="audio">Audio</label>
+                            <input type="radio" id="image" name="moderation_type" value="image" disabled>
+                            <label for="image">Image</label>
+                            <input type="radio" id="video" name="moderation_type" value="video" disabled>
+                            <label for="video">Video</label>
+                        </div>
                     </div>
-                </div>
-                <div class="inputWrapper">
-                    <div class="labelWrapper"><label class="label_title">Input</label></div>
+                    <div class="inputWrapper" id="text_input">
+                        <div class="labelWrapper"><label class="label_title">User Text</label></div>
                         <textarea class="text_area" name='user_input' placeholder='Enter Text Here'>{{data.text}}</textarea>
-                </div>
-                <div class="inputWrapper">
-                    <div class="button-submit"><input type="submit" value="moderate" class="submit"></div>
-                </div>
-            </form>
-                <div class="outputWrapper">
-                    <div class="output">Output</div>
-                    <b>Type</b> <br/>{{data.type}}<br/><br/>
-                    <b>Flag</b> <br/>{{data.Flag}}<br/><br/>
-                    <b>Model Accuracy:</b> <br/>{{data.accuracy}}<br/><br/>
-                    <b>Moderated as:</b>  <br/>
-                    {{data.updated_text}}<br/>
-                </div>
+                    </div>
+                    <div class="inputWrapper" id="web_input">
+                        <div class="labelWrapper"><label class="label_title">Web Url</label></div>
+                        <textarea class="text_area" name='user_input' placeholder='Enter URL Here'>{{data.text}}</textarea>
+                    </div>
+                    <div class="inputWrapper" id="audio_input">
+                        <div class="labelWrapper"><label class="label_title">Audio File</label></div>
+                        <input type="file" name= 'user_input' accept=".wav" />
+                    </div>
+                    <div class="inputWrapper">
+                        <div class="button-submit"><input type="submit" value="moderate" class="submit"></div>
+                    </div>
+                </form>
+                {% if data.isLoaded == 'true' %}
+                    <div class="outputWrapper">
+                        <div class="output">Output</div>
+                        <div>
+                            <b>Type</b> <br/>{{data.type}}<br/><br/>
+                            <b>Flag</b> <br/>{{data.message}}<br/><br/>
+                            <b>Model Accuracy:</b> <br/>{{data.accuracy}}<br/><br/>
+                            <b>Sending as:</b>  <br/>
+                            {{data.updated_text}}<br/>
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
         </div>
 
     </div>

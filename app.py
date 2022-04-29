@@ -100,9 +100,10 @@ def index():
 
 @app.route('/moderate', methods=['GET', 'POST'])
 def predict():
-    moderation_type = request.form.get('moderation_type') #web,text
+    moderation_type = request.form.get('moderation_type') #web,text, 
     user_input = request.form.get('user_input')
     if (moderation_type=="web"):
+        print ('User input from web=',user_input )
         Webscrappedtext= webscraper.scrape_page_text(user_input)
         updated_text= addStrick(Webscrappedtext)
         clean_user_input= [text_cleaner(Webscrappedtext)]
@@ -110,11 +111,12 @@ def predict():
         pred = loaded_model.predict(test_vect)
         print(pred)
         if (pred == '1'):
-            flag = "This page is not safe for children"
+            message = "This page is not safe for children"
         else:
-            flag = "This page is safe for children"
+            message = "This page is safe for children"
     
     elif (moderation_type=="audio") :
+        print('Reached audio')
         print(user_input)
 
 
@@ -125,17 +127,17 @@ def predict():
         pred = loaded_model.predict(test_vect)
         print(pred)
         if (pred == '1'):
-            flag = "This comment is not safe for children"
+            message = "This comment is not safe for children"
         else:
-            flag = "This comment is safe for children"
-    
-    
+            message = "This comment is safe for children"
+
     
     output = {
         "type": moderation_type,
         "text": user_input,
-        "Flag": flag,
+        "message": message,
         "accuracy": accuracy,
+        "isLoaded": "true",
         "updated_text": updated_text
           }
     return render_template('index.html', data=output)

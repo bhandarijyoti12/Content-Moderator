@@ -1,6 +1,7 @@
 body{
     background: cornflowerblue;
     height: 100vh;
+    font-family: 'Nunito', sans-serif;
 }
 .title{
     font-size: 25px;
@@ -42,9 +43,16 @@ label{
 .moderation{
     align-content: center;
 }
+
 .moderation input{
     width: 20px;
+    cursor: pointer;
 }
+
+.moderation label{
+    cursor: pointer;
+}
+
 .labelWrapper{
     padding: 7px 0;
 }
