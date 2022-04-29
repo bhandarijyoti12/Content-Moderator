@@ -24,7 +24,7 @@ To deactivate the environment use
     pip install flask
 
 ### 5. Install required packages
-    pip install sklearn pandas numpy webscraper tensorflow nltk sklearn
+    pip install sklearn pandas numpy webscraper tensorflow nltk sklearn selenium bs4
 
 Note: Refer to app.py for more which package to install.
 
