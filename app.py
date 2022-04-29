@@ -131,7 +131,7 @@ def predict():
         "text": user_input,
         "message": message,
         "accuracy": accuracy,
-        "isLoaded": true
+        "isLoaded": "true",
         "updated_text": updated_text
           }
     return render_template('index.html', data=output)
