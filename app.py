@@ -141,15 +141,14 @@ def predict():
             flag = "This comment is safe for children"
 
     
-    abuseWord = "shit"
-    strick = '*' * len(abuseWord)
+    
     updated_text = addStrick(user_input)
     output = {
         "type": moderation_type,
         "text": user_input,
         "Flag": flag,
         "accuracy": accuracy,
-
+        "updated_text": updated_text
           }
     return render_template('index.html', data=output)
 
