@@ -14,8 +14,9 @@ options.add_argument("--headless")
  
 # function
 def scrape_page_text(url:str):
+    print("chrome--------------->>>>>>")
     # create driver
-    driver = webdriver.Chrome(executable_path="chromedriver",
+    driver = webdriver.Chrome(executable_path="chromedriver.exe",
      options=options)
     # launch driver
     driver.get(url)

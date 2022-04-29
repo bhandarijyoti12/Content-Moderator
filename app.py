@@ -96,13 +96,13 @@ accuracy = loaded_model.score(X_test, y_test) * 100
 
 @app.route('/')
 def index():
-    return render_template('index_past.html', data='')
+    return render_template('index.html', data='')
 
 @app.route('/moderate', methods=['GET', 'POST'])
 def predict():
-    moderation_type = request.form.get('moderation_type') #web,text, 
-    user_input = request.form.get('user_input')
+    moderation_type = request.form.get('moderation_type') #web,text,audio
     if (moderation_type=="web"):
+        user_input = request.form.get('web_user_input')
         print ('User input from web=',user_input )
         Webscrappedtext= webscraper.scrape_page_text(user_input)
         updated_text= addStrick(Webscrappedtext)
@@ -115,12 +115,18 @@ def predict():
         else:
             message = "This page is safe for children"
     
-    elif (moderation_type=="audio") :
+    elif (moderation_type=="audio"):
+        user_input="File Uploaded"
+        message="file upload"
+        updated_text="file upload"
+        file = request.files['audio_user_input']
         print('Reached audio')
-        print(user_input)
+        print(file)
 
 
     else:
+        user_input = request.form.get('user_input')
+        print ('User input from web=',user_input )
         updated_text = addStrick(user_input)
         clean_user_input= [text_cleaner(user_input)]
         test_vect = vectoriser.transform(clean_user_input)
@@ -140,7 +146,7 @@ def predict():
         "isLoaded": "true",
         "updated_text": updated_text
           }
-    return render_template('index_past.html', data=output)
+    return render_template('index.html', data=output)
 
 if __name__ == '__main__':
     app.run(debug=True)

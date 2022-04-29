@@ -42,7 +42,7 @@
         <div class="title">Content Moderation</div>
         <div class="register_page">
             <div class="form">
-                <form action="/moderate" method="post">
+                <form action="/moderate" method="post" enctype="multipart/form-data">
                     <div class="inputWrapper">
                         <div class="labelWrapper"><label class="label_title">Moderation Type</label> </div>
                         <div class="moderation">
@@ -64,11 +64,11 @@
                     </div>
                     <div class="inputWrapper" id="web_input">
                         <div class="labelWrapper"><label class="label_title">Web Url</label></div>
-                        <textarea class="text_area" name='user_input' placeholder='Enter URL Here'>{{data.text}}</textarea>
+                        <textarea class="text_area" name='web_user_input' placeholder='Enter URL Here'>{{data.text}}</textarea>
                     </div>
                     <div class="inputWrapper" id="audio_input">
                         <div class="labelWrapper"><label class="label_title">Audio File</label></div>
-                        <input type="file" name= 'user_input' accept=".wav" />
+                        <input type="file" name= 'audio_user_input' accept=".wav" />
                     </div>
                     <div class="inputWrapper">
                         <div class="button-submit"><input type="submit" value="moderate" class="submit"></div>
