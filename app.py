@@ -104,8 +104,8 @@ def predict():
     user_input = request.form.get('user_input')
     if (moderation_type=="web"):
         Webscrappedtext= webscraper.scrape_page_text(user_input)
+        updated_text= addStrick(Webscrappedtext)
         clean_user_input= [text_cleaner(Webscrappedtext)]
-        updated_text= addStrick(clean_user_input)
         test_vect = vectoriser.transform(clean_user_input)
         pred = loaded_model.predict(test_vect)
         print(pred)
@@ -114,7 +114,11 @@ def predict():
         else:
             flag = "This page is safe for children"
     
-    else :
+    elif (moderation_type=="audio") :
+        print(user_input)
+
+
+    else:
         updated_text = addStrick(user_input)
         clean_user_input= [text_cleaner(user_input)]
         test_vect = vectoriser.transform(clean_user_input)
@@ -124,7 +128,8 @@ def predict():
             flag = "This comment is not safe for children"
         else:
             flag = "This comment is safe for children"
-
+    
+    
     
     output = {
         "type": moderation_type,
