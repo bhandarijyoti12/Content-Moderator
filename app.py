@@ -9,7 +9,7 @@ import nltk
 from nltk.corpus import stopwords
 import string
 from sklearn.model_selection import train_test_split
-
+import tensorflow as tf 
 
 
 app = Flask(__name__, template_folder='Templates')
@@ -63,6 +63,7 @@ df_offensive.drop(['Unnamed: 0','count','hate_speech','offensive_language','neit
 df_offensive.rename(columns ={'class':'label'}, inplace = True)
 df_train_final = pd.concat([df_train,df_offensive])
 df_train_final.drop(['id'],axis=1,inplace=True)
+df_train_final['tweet']=df_train_final['tweet'].apply(text_cleaner)
 X = df_train_final['tweet'].astype(str)  # Converting to string, because vectorizer does'nt accept list.
 y = df_train_final['label'].astype(str)  # Converting to string, because vectorizer does'nt accept list.
 X_train, X_test, y_train, y_test =  train_test_split(X, y, train_size = 0.8, random_state = 3) 
@@ -71,6 +72,8 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 # Extracting features using TF-IDF (1,2) - unigrams and bigrams
 vectoriser = TfidfVectorizer(ngram_range=(1,2), max_features=500000)
 vectoriser.fit(X_train)
+X_test= vectoriser.transform(X_test)
+accuracy = loaded_model.score(X_test, y_test) * 100
 
 @app.route('/')
 def index():
@@ -80,15 +83,15 @@ def index():
 def predict():
     moderation_type = request.form.get('moderation_type') #web,text
     user_input = request.form.get('user_input')
-    clean_user_input= text_cleaner(text_cleaner)
-    test_vect = vectoriser.transform(clean_user_input)
-
+    clean_user_input= text_cleaner(user_input)
+    test_vect = vectoriser.transform([clean_user_input])
     pred = loaded_model.predict(test_vect)
-    if (pred=='1'):
-        flag= 'Text falls under hate and abusive category'
+    print(pred)
+    if (pred == '1'):
+        flag = "Text falls under hate and abusive category"
     else:
-        flag= 'Text falls under safe category.'
-#     call model method
+        flag = "Text falls under safe category"
+   
     abuseWord = "shit"
     strick = '*' * len(abuseWord)
     updated_text = user_input.replace(abuseWord, strick)
@@ -96,7 +99,7 @@ def predict():
         "type": moderation_type,
         "text": user_input,
         "Flag": flag,
-        "accuracy": "95.7",
+        "accuracy": accuracy,
         "updated_text": updated_text
           }
     return render_template('index.html', data=output)

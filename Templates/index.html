@@ -37,16 +37,14 @@
                     <div class="button-submit"><input type="submit" value="moderate" class="submit"></div>
                 </div>
             </form>
-            {% if data.isAbusive == 'true' %}
                 <div class="outputWrapper">
                     <div class="output">Output</div>
                     <b>Type</b> <br/>{{data.type}}<br/><br/>
+                    <b>Flag</b> <br/>{{data.Flag}}<br/><br/>
                     <b>Model Accuracy:</b> <br/>{{data.accuracy}}<br/><br/>
-                    Abusive sentence found. <br/>
                     <b>Sending as:</b>  <br/>
                     {{data.updated_text}}<br/>
                 </div>
-            {% endif %}
         </div>
 
     </div>
