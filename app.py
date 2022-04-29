@@ -105,6 +105,7 @@ def predict():
     if (moderation_type=="web"):
         Webscrappedtext= webscraper.scrape_page_text(user_input)
         clean_user_input= [text_cleaner(Webscrappedtext)]
+        updated_text= addStrick(clean_user_input)
         test_vect = vectoriser.transform(clean_user_input)
         pred = loaded_model.predict(test_vect)
         print(pred)
@@ -114,6 +115,7 @@ def predict():
             flag = "This page is safe for children"
     
     else :
+        updated_text = addStrick(user_input)
         clean_user_input= [text_cleaner(user_input)]
         test_vect = vectoriser.transform(clean_user_input)
         pred = loaded_model.predict(test_vect)
@@ -124,9 +126,6 @@ def predict():
             flag = "This comment is safe for children"
 
     
-
-    
-    updated_text = addStrick(user_input)
     output = {
         "type": moderation_type,
         "text": user_input,

@@ -24,7 +24,7 @@ def get_text_from_small_audio(filename):
 
 
 
-def get_large_audio_transcription(path):
+def get_text_from_large_audio(path):
     """
     Splitting the large audio file into chunks
     and apply speech recognition on each of these chunks
@@ -70,7 +70,7 @@ def get_large_audio_transcription(path):
 print("\nFull text:", get_text_from_small_audio(filename))
 
 
-print("\nFull text from large audio function:", get_large_audio_transcription(filename))
+print("\nFull text from large audio function:", get_text_from_large_audio(filename))
 
 
 
