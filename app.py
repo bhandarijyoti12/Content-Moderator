@@ -109,9 +109,9 @@ def predict():
         pred = loaded_model.predict(test_vect)
         print(pred)
         if (pred == '1'):
-            flag = "This page is not safe for children"
+            message = "This page is not safe for children"
         else:
-            flag = "This page is safe for children"
+            message = "This page is safe for children"
     
     else :
         clean_user_input= [text_cleaner(user_input)]
@@ -119,9 +119,9 @@ def predict():
         pred = loaded_model.predict(test_vect)
         print(pred)
         if (pred == '1'):
-            flag = "This comment is not safe for children"
+            message = "This comment is not safe for children"
         else:
-            flag = "This comment is safe for children"
+            message = "This comment is safe for children"
 
     
 
@@ -130,8 +130,9 @@ def predict():
     output = {
         "type": moderation_type,
         "text": user_input,
-        "Flag": flag,
+        "message": message,
         "accuracy": accuracy,
+        "isLoaded": true
         "updated_text": updated_text
           }
     return render_template('index.html', data=output)
