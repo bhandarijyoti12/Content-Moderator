@@ -25,6 +25,23 @@ BAD_SYMBOLS_RE = re.compile('[^0-9a-z #+_]')
 STOPWORDS = set(stopwords.words('english'))
 
 
+file = open("moderate_list.txt", "r")
+moderate_lists = file.read()
+mod_lists = moderate_lists.split(",")
+mod_list_modified=[]
+for word in mod_lists:
+    mod_list_modified.append(word.lstrip())
+
+def addStrick(user_input = ""):
+    modified_sentence = ""
+    for text in user_input.split():
+        if text.lower() in mod_list_modified:
+            modified_sentence += text[:1] + '*' * (len(text)-1) + ' ' 
+        else:
+            modified_sentence += text + ' '            
+    return modified_sentence
+
+
 def text_cleaner(input_text):
     input_text = re.sub(r'@[A-Za-z0-9_]+','',str(input_text))    # Removing @mentions
     input_text = re.sub(r'#','',str(input_text))                 # Removing #tag symbol
@@ -113,7 +130,7 @@ def predict():
    
     abuseWord = "shit"
     strick = '*' * len(abuseWord)
-    updated_text = user_input.replace(abuseWord, strick)
+    updated_text = addStrick(user_input)
     output = {
         "type": moderation_type,
         "text": user_input,
