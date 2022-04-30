@@ -20,6 +20,9 @@
             $('input[type=radio][name=moderation_type]').change(function() {
                 $('#output_wrap').hide();
 
+                $('#web_user_input').val('');
+                $('#user_input').val('');
+
                 if (this.value == 'text') {
                     $('#text_input').show();
                     $('#web_input').hide();
@@ -64,11 +67,11 @@
                     </div>
                     <div class="inputWrapper" id="text_input">
                         <div class="labelWrapper"><label class="label_title">User Text</label></div>
-                        <textarea class="text_area" name='user_input' placeholder='Enter Text Here'>{{data.text}}</textarea>
+                        <textarea class="text_area" name='user_input' id="user_input" placeholder='Enter Text Here'>{{data.text}}</textarea>
                     </div>
                     <div class="inputWrapper" id="web_input">
                         <div class="labelWrapper"><label class="label_title">Web Url</label></div>
-                        <textarea class="text_area" name='web_user_input' placeholder='Enter URL Here'>{{data.text}}</textarea>
+                        <textarea class="text_area" name='web_user_input' id="web_user_input" placeholder='Enter URL Here'>{{data.text}}</textarea>
                     </div>
                     <div class="inputWrapper" id="audio_input">
                         <div class="labelWrapper"><label class="label_title">Audio File</label></div>
