@@ -9,7 +9,7 @@
     <link rel='stylesheet' type='text/css' media='screen' href="{{ url_for('static', filename='css/main.css') }}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;600&display=swap" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script>
         $(document).ready(function() {
@@ -87,7 +87,6 @@
                         <div>
                             <b>Type</b> <br/>{{data.type}}<br/><br/>
                             <b>Flag</b> <br/>{{data.message}}<br/><br/>
-                            <b>Model Accuracy:</b> <br/>{{data.accuracy}}<br/><br/>
                             <b>Moderated as:</b>  <br/>
                             {{data.updated_text}}<br/>
                         </div>
