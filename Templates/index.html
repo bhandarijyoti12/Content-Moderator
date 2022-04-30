@@ -15,9 +15,10 @@
         $(document).ready(function() {
             $('#web_input').hide();
             $('#audio_input').hide();
+            $('#output_wrap').show();
 
             $('input[type=radio][name=moderation_type]').change(function() {
-                $('#message').val('');
+                $('#output_wrap').hide();
 
                 if (this.value == 'text') {
                     $('#text_input').show();
@@ -78,7 +79,7 @@
                     </div>
                 </form>
                 {% if data.isLoaded == 'true' %}
-                    <div class="outputWrapper">
+                    <div class="outputWrapper" id="output_wrap">
                         <div class="output">Output</div>
                         <div>
                             <b>Type</b> <br/>{{data.type}}<br/><br/>
