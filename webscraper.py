@@ -7,7 +7,8 @@ from bs4 import BeautifulSoup
 from time import sleep
 from selenium.common.exceptions import NoSuchElementException
  
-path="/Users/Abiral/Downloads/"
+#path="/Users/Abiral/Downloads/"
+path= '/Users/jyotibhandari/Documents/Final_Project_AI/'
 chromedriver_path = path+'chromedriver.exe'
 service = Service(path+'chromedriver.exe')
 options = Options()
