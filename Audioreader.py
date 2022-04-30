@@ -67,11 +67,6 @@ def get_text_from_large_audio(path):
 
 
 
-print("\nFull text:", get_text_from_small_audio(filename))
-
-
-print("\nFull text from large audio function:", get_text_from_large_audio(filename))
-
 
 
 
