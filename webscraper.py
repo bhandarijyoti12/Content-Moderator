@@ -7,8 +7,9 @@ from bs4 import BeautifulSoup
 from time import sleep
 from selenium.common.exceptions import NoSuchElementException
  
-chromedriver_path = 'chromedriver.exe'
-service = Service('chromedriver.exe')
+path="/Users/Abiral/Downloads/"
+chromedriver_path = path+'chromedriver.exe'
+service = Service(path+'chromedriver.exe')
 options = Options()
 options.add_argument("--headless")
  
@@ -16,7 +17,7 @@ options.add_argument("--headless")
 def scrape_page_text(url:str):
     print("chrome--------------->>>>>>")
     # create driver
-    driver = webdriver.Chrome(executable_path="chromedriver.exe",
+    driver = webdriver.Chrome(executable_path=path+'chromedriver',
      options=options)
     # launch driver
     driver.get(url)

@@ -11,6 +11,7 @@ import string
 from sklearn.model_selection import train_test_split
 import tensorflow as tf 
 import webscraper
+import Audioreader
 
 app = Flask(__name__, template_folder='Templates')
 loaded_model = pickle.load(open('finalized_model.sav', 'rb'))
@@ -120,6 +121,8 @@ def predict():
         message="file upload"
         updated_text="file upload"
         file = request.files['audio_user_input']
+        print()
+        updated_text = Audioreader.get_text_from_large_audio(file)
         print('Reached audio')
         print(file)
 
