@@ -120,10 +120,10 @@ def predict():
         file = request.files['audio_user_input']
         user_input = "Audio Text- "+Audioreader.get_text_from_large_audio(file)
         print(user_input)
-        updated_text=addStrick(user_input)
         clean_user_input= [text_cleaner(user_input)]
         test_vect = vectoriser.transform(clean_user_input)
         pred = loaded_model.predict(test_vect)
+        updated_text=addStrick(user_input)
         if (pred == '1'):
             message = "This audio is not safe for children"
         else:
