@@ -32,8 +32,9 @@ def addStrick(user_input = ""):
     modified_sentence = ""
     filter_quote = user_input.replace('"', '')
     for text in filter_quote.split():
-        if text.lower() in mod_list_modified:
-            modified_sentence += text[:1] + '*' * (len(text)-1)
+        updated_text=text.lower().replace('.','').replace(',','').replace('!','').replace('?','')
+        if updated_text in mod_list_modified:
+            modified_sentence += text[:1] + '*' * (len(text)-1) + ' '
         else:
             modified_sentence += text + ' '
     return modified_sentence
