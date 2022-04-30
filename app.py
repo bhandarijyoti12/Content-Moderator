@@ -30,11 +30,12 @@ for word in mod_lists:
 
 def addStrick(user_input = ""):
     modified_sentence = ""
-    for text in user_input.split():
-        if text.lower() in mod_list_modified:
-            modified_sentence += text[:1] + '*' * (len(text)-1) + ' ' 
+    filter_quote = user_input.replace('"', '')
+    for text in filter_quote.split():
+        if text in mod_list_modified:
+            modified_sentence += text[:1] + '*' * (len(text)-1)
         else:
-            modified_sentence += text + ' '            
+            modified_sentence += text + ' '
     return modified_sentence
 
 
@@ -110,23 +111,22 @@ def predict():
         clean_user_input= [text_cleaner(Webscrappedtext)]
         test_vect = vectoriser.transform(clean_user_input)
         pred = loaded_model.predict(test_vect)
-        print(pred)
         if (pred == '1'):
             message = "This page is not safe for children"
         else:
             message = "This page is safe for children"
-    
+
     elif (moderation_type=="audio"):
-        user_input="File Uploaded"
-        message="file upload"
-        updated_text="file upload"
         file = request.files['audio_user_input']
-        print()
-        updated_text = Audioreader.get_text_from_large_audio(file)
-        print('Reached audio')
-        print(file)
-
-
+        user_input = "Audio Text- "+Audioreader.get_text_from_large_audio(file)
+        updated_text=addStrick(audio_text)
+        clean_user_input= [text_cleaner(user_input)]
+        test_vect = vectoriser.transform(clean_user_input)
+        pred = loaded_model.predict(test_vect)
+        if (pred == '1'):
+            message = "This audio is not safe for children"
+        else:
+            message = "This audio is safe for children"
     else:
         user_input = request.form.get('user_input')
         print ('User input from web=',user_input )

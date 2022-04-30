@@ -17,6 +17,8 @@
             $('#audio_input').hide();
 
             $('input[type=radio][name=moderation_type]').change(function() {
+                $('#message').val('');
+
                 if (this.value == 'text') {
                     $('#text_input').show();
                     $('#web_input').hide();
@@ -34,6 +36,22 @@
                 }
             });
         });
+
+        var clickBtn = (e) => {
+            $('#output').show();
+            $('#output_content').hide();
+            $('#submit_btn').prop('disabled', true);
+            $("#submit_btn").prop("value", "Please Wait");
+
+            setTimeout(function() {
+                $('#output').hide();
+                $('#output_content').show();
+                $('#submit_btn').prop('disabled', false);
+                $("#submit_btn").prop("value", "Moderate");
+            }, 3000);
+        };
+        $(document).on('click', '#submit_btn', clickBtn);
+
     </script>
 </head>
 
@@ -71,7 +89,7 @@
                         <input type="file" name= 'audio_user_input' accept=".wav" />
                     </div>
                     <div class="inputWrapper">
-                        <div class="button-submit"><input type="submit" value="moderate" class="submit"></div>
+                        <div class="button-submit"><input type="submit" id="submit_btn" value="moderate" class="submit"></div>
                     </div>
                 </form>
                 {% if data.isLoaded == 'true' %}
