@@ -1,10 +1,11 @@
 ## Content Moderation : 
 
-This project is done as the requirement for the first semster of the master's program for the course Intro to Artificial Intelligence. We have made  a platform  that allows for content filtering that detects and filters abusive and offensive contents which can be in text or audio format. We got twitter Hate Speech and Offensive Language Dataset called labeled_data.csv and Twitter Sentiment Analysis data (train.csv and test.csv) from Kaggle. 
+This project is done as the requirement for the first semster of the master's program for the course Intro to Artificial Intelligence. We have made  a platform  that allows for content filtering that detects and filters abusive and offensive contents which can be in text or audio format. We have used twitter Hate Speech and Offensive Language Dataset called labeled_data.csv and Twitter Sentiment Analysis data (train.csv and test.csv) from Kaggle to train our model. We have used Support Vector Classification (SVC) technique to make a model. Other algorithms such as MultinomialNB, LogisticRegression Algorithm, RandomForestClassifier and DecisionTreeClassifier were also used to train the data but we got the highest precision, accurcay, f1 score from SVC so we sticked to the Support Vector Classification (SVC) algorithm to make this system. 
 
 ### 1. Prerequisite
 - Python
 - Pip
+- Jupyter notebook
 
 Commands
 
@@ -77,6 +78,9 @@ Note: If you want to run the project via flask environment
 
    
 ### 8.Presentation file for this project has been added as AI- Content_Moderation_Presentation.pptx. Please have a look at it for more details.
+
+### 9. Future Enhancement :
+    We tried to used the neural network to train our model but it was taking very long time to train the data. We could used neural network for the better results. 
 
    
 
