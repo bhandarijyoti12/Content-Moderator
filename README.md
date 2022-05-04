@@ -20,8 +20,8 @@ Commands
     venv\Scripts\activate
 
     For Mac users: 
-    python -m venv .venv
-    source .venv/bin/activate
+    python -m venv venv
+    source venv/bin/activate
 
 To deactivate the environment use
     
@@ -31,7 +31,7 @@ To deactivate the environment use
     pip install flask
 
 ### 5. Install required packages
-    pip install sklearn 
+    -sklearn 
     -pandas 
     -numpy 
     -webscraper 
