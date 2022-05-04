@@ -14,9 +14,13 @@ Commands
     py -m pip install --upgrade pip
 
 ### 2. Install and Activate Environment
-
+    For Windows user : 
     py -m venv venv
     venv\Scripts\activate
+
+    For Mac users: 
+    python -m venv .venv
+    source .venv/bin/activate
 
 To deactivate the environment use
     
@@ -72,8 +76,7 @@ Note: If you want to run the project via flask environment
 
 
    
-### 8.Presentation file for this project has been added . 
-Please have a look at it for more details.
+### 8.Presentation file for this project has been added as AI- Content_Moderation_Presentation.pptx. Please have a look at it for more details.
 
    
 
