@@ -1,6 +1,6 @@
 ## Content Moderation : 
 
-This project is done as the requirement for the first semster of the master's program for the course Into to Artificial Intelligence. We have made  a platform  that allows for content filtering that detects and filters abusive and offensive contents which can be in text or audio format. We got twitter Hate Speech and Offensive Language Dataset called labeled_data.csv and Twitter Sentiment Analysis data (train.csv and test.csv) from Kaggle. 
+This project is done as the requirement for the first semster of the master's program for the course Intro to Artificial Intelligence. We have made  a platform  that allows for content filtering that detects and filters abusive and offensive contents which can be in text or audio format. We got twitter Hate Speech and Offensive Language Dataset called labeled_data.csv and Twitter Sentiment Analysis data (train.csv and test.csv) from Kaggle. 
 
 ### 1. Prerequisite
 - Python
@@ -54,32 +54,27 @@ pip install --global-option='build_ext' --global-option='-I/------PATH-------' -
 
 Note: Refer to app.py for more packages to be installed.
 
-### 6. Run Application
-    flask run
-
-### 7. Access the project at
-    http://127.0.0.1:5000/
-
-Note: If you want to run the project via flask environment 
-
 ### Install python-dotenv for using enviroment (optional)
     pip install python-dotenv
 
 #### Then set the Environment 
     set FLASK_APP=app.py
 
-## Deployment guide
+### 6. Run Application
+    flask run
 
-    pip install gunicorn
-    pip freeze > requirements.txt
-
-## Deployment to heroku guide
-
-    heroku login
-    git commit -m "herokyu deployment-test added files" -a // Note: only if required to commit
-    heroku git:remote -a web-content-moderation
+### 7. Access the project at
+    http://127.0.0.1:5000/
     
-    git push heroku master:main
+    
 
-## Useful Heroku commands
-    heroku run bash -a web-content-moderation // to view all folder structures
+Note: If you want to run the project via flask environment 
+
+
+   
+### 8.Presentation file for this project has been added . 
+Please have a look at it for more details.
+
+   
+
+
