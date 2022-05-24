@@ -89,7 +89,7 @@ Note: If you want to run the project via flask environment
 ### 8.Presentation file for this project has been added as AI- Content_Moderation_Presentation.pptx. Please have a look at it for more details.
 
 ### 9. Future Enhancement :
-* We tried to used the neural network to train our model but it was taking very long time to train the data. We could used neural network for the better results. 
+* We tried to used the neural network to train our model but it was taking very long time to train the data. We can use neural network for the better results. 
 * We have only done text, webpage and audio analysis for now. We can add video and image analysis for the future enhancement. 
     
     
